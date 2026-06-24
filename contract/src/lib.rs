@@ -2,6 +2,7 @@ pub mod cache;
 pub mod config;
 pub mod hash_validator;
 pub mod metrics;
+pub mod module;
 pub mod rate_limit;
 pub mod stellar;
 
@@ -24,6 +25,8 @@ use tracing::{info, warn};
 use cache::CacheBackend;
 use hash_validator::{HashValidator, ValidationError as HashValidationError};
 use metrics::MetricsRegistry;
+use module::batch_revoke::batch_revoke_documents;
+use module::exists::check_document_exists;
 use stellar::{StellarClient, TransactionRecord};
 
 // Application state
@@ -182,6 +185,8 @@ pub fn app(state: AppState) -> Router {
         .route("/verify/:hash/history", get(verify_document_history))
         .route("/submit", post(submit_document))
         .route("/revoke", post(revoke_document))
+        .route("/revoke/batch", post(batch_revoke_documents))
+        .route("/exists/:hash", get(check_document_exists))
         .route("/transfer", post(record_transfer))
         .layer(TraceLayer::new_for_http())
         .with_state(state)
