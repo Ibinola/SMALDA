@@ -8,8 +8,8 @@ use futures::future::join_all;
 use serde::{Deserialize, Serialize};
 use tracing::{info, warn};
 
-use crate::{map_validation_error, AppState, ValidationErrorResponse};
 use crate::hash_validator::HashValidator;
+use crate::{map_validation_error, AppState, ValidationErrorResponse};
 
 /// A single revocation item within a batch request.
 #[derive(Debug, Deserialize, Clone)]

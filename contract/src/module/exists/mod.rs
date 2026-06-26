@@ -7,8 +7,8 @@ use axum::{
 use serde::Serialize;
 use tracing::{info, warn};
 
-use crate::{map_validation_error, AppState, VerifyResponse};
 use crate::hash_validator::HashValidator;
+use crate::{map_validation_error, AppState, VerifyResponse};
 
 /// Minimal response for the document existence check endpoint.
 #[derive(Debug, Serialize)]
