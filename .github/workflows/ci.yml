@@ -182,8 +182,5 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run migrations
-        run: npm run migration:run
-
       - name: E2E tests
         run: npm run test:e2e -- --passWithNoTests
